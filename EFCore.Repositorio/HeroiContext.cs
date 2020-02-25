@@ -15,6 +15,11 @@ namespace EFCore.Repositorio
                 
         }
 
+        //public HeroiContext()
+        //{
+
+        //}
+
         public DbSet<Heroi> Herois { get; set; }
         public DbSet<Batalha> Batalhas { get; set; }
         public DbSet<Arma> Armas { get; set; }
@@ -22,10 +27,10 @@ namespace EFCore.Repositorio
         public DbSet<IdentidadeSecreta> IdentidadeSecreta { get; set; }
 
 
-        //// configurando string de conexao
+        // configurando string de conexao
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    optionsBuilder.UseSqlServer("Server=DESKTOP-BK18BBM;Database=HeroisDB;User Id=sa;Password=123456;");
+        //    optionsBuilder.UseSqlServer("Server=DESKTOP-BK18BBM;Database=HerosAppDB;User Id=sa;Password=123456;");
         //}
 
 
