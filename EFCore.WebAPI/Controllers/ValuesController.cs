@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EFCore.Dominio;
 using EFCore.Repositorio;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.WebAPI.Controllers
 {
@@ -17,6 +18,52 @@ namespace EFCore.WebAPI.Controllers
         public ValuesController(HeroiContext context)
         {
             _context = context;
+        }
+
+        // GET api/values/pegartodos
+        [HttpGet("getid/{id}")]
+        public ActionResult GetById(int id)
+        {
+            //select na tabela de Herois com LinQ
+            var listHerois = _context.Herois
+                            .Where(x => x.Id == id)
+                            .ToList();
+
+            return Ok(listHerois);
+        }
+
+        // GET api/values/pegartodos
+        [HttpGet("pegartodos")]
+        public ActionResult GetAll()
+        {
+            //select na tabela de Herois com LinQ
+            var listHerois = _context.Herois.ToList();
+
+            return Ok(listHerois);
+        }
+
+        // GET api/values/filtro/nomeDoHeroi
+        [HttpGet("filtro/{nome}")]
+        public ActionResult GetFiltro(string nome)
+        {
+            //select na tabela de Herois com LinQ
+            var listHerois = _context.Herois
+                            .Where(h => h.Nome.Contains(nome))
+                            .ToList();
+
+
+            //Outra forma de aplicar um Select com o LinQ, usando o LIKE
+            //var listHerois2 = _context.Herois
+            //                .Where(h => EF.Functions.Like(h.Nome, $"%{nome}%"))
+            //                .ToList();
+
+
+            //select na tabela de Herois como query
+            //var listHerois = (from heroi in _context.Herois
+            //                  where heroi.Nome.Contains(nome)
+            //                  select heroi).ToList();
+
+            return Ok(listHerois);
         }
 
         // GET api/values/InserirHeroi/nomeDoHeroi
@@ -37,7 +84,7 @@ namespace EFCore.WebAPI.Controllers
         [HttpGet("AddRange")]   // mudar para o verbo POST no postman
         public ActionResult<string> GetAddRange()
         {
-            // adicionar vários
+            // adicionar vários usando AddRange
             _context.AddRange(
                 new Heroi { Nome = "Capitão América"},
                 new Heroi { Nome = "Doutor Estranho" },
@@ -53,29 +100,9 @@ namespace EFCore.WebAPI.Controllers
             return Ok();
         }
 
-        // GET api/values/filtro/nomeDoHeroi
-        [HttpGet("filtro/{nome}")]
-        public ActionResult GetFiltro(string nome)
-        {
-            //select na tabela de Herois com LinQ
-            var listHerois = _context.Herois
-                            .Where(h => h.Nome.Contains(nome))
-                            .ToList();
-
-
-            //select na tabela de Herois como query
-            //var listHerois = (from heroi in _context.Herois
-            //                  where heroi.Nome.Contains(nome)
-            //                  select heroi).ToList();
-
-            return Ok(listHerois);
-
-        }
-
-
         // GET api/values/Atualizar/qualquer coisa
         [HttpGet("Atualizar/{nameHero}")]   // mudar para o verbo PUT no postman
-        public ActionResult<string> Get2(string nameHero)
+        public ActionResult<string> AtualizarNomeHeroi(string nameHero)
         {
             //teste para atualizar UPDATE
             //var heroi = new Heroi { Nome = nameHero };
