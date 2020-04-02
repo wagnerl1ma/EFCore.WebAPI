@@ -43,7 +43,7 @@ namespace EFCore.WebAPI.Controllers
 
         //// POST: api/Heroi
         //[HttpPost]
-        //public ActionResult Post()
+        //public ActionResult Post()                        //POST orientado a objeto
         //{
         //    try
         //    {
@@ -113,7 +113,7 @@ namespace EFCore.WebAPI.Controllers
 
         //// PUT: api/Heroi/5
         //[HttpPut("{id}")]
-        //public ActionResult Put(int id)
+        //public ActionResult Put(int id)                   //PUT orientado a objeto
         //{
         //    try
         //    {
