@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.WebAPI.Controllers
 {
+   //rota: "api/nomedacontroller"
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
