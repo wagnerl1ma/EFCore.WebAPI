@@ -1,0 +1,41 @@
+Anotações curso Asp.net Core API
+
+POST formato JSON, PUT formato JSON, Realizando inserts e updates com mais de um objeto no formato JSON
+
+
+
+
+
+exemplo JSON para Adicionar Nome, Identidade Secreta e Armas
+{
+    "nome": "Homem Aranha",
+	"identidade" : {
+    	"nomereal" : "Peter Parker"
+    },
+    "armas" : [
+    	{	
+    		"nome": "Teias"
+    	}	
+    ]
+}
+
+
+exemplo JSON para Atualizar Nome, identidade Secreta e Armas
+{
+	"id": 3,
+    "nome": "Homem Aranha",
+	"identidade" : {
+		"id" : 1,
+    	"nomereal" : "Peter Parker"
+    },
+    "armas" : [
+    	{	
+    		"id": 8,
+    		"nome": "Teias"
+    	}	
+    ]
+}
+
+
+
+
