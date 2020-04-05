@@ -1,6 +1,8 @@
 Anotações curso Asp.net Core API
 
+commits:
 POST formato JSON, PUT formato JSON, Realizando inserts e updates com mais de um objeto no formato JSON
+Nova Migration e criação da controller BatalhaController
 
 
 
@@ -21,40 +23,69 @@ exemplo JSON para Adicionar Nome, Identidade Secreta e Armas
 }
 
 
-exemplo JSON para Atualizar Nome, identidade Secreta e Armas
+exemplo JSON para Atualizar Nome, identidade Secreta e Armas e Batalha
+
 {
-	"id": 3,
-    "nome": "Homem Aranha",
+	"id": 9,
+    "nome": "Gavião Arqueiro",
 	"identidade" : {
-		"id" : 1,
-    	"nomereal" : "Peter Parker"
+		"id" : 2,
+    	"nomereal" : "Clint Barton"
     },
     "armas" : [
     	{	
-    		"id": 8,
-    		"nome": "Teias"
+    		"id": 9,
+    		"nome": "Arco e Flechas"
     	}	
     ],
 	"heroiBatalhas" : [
 		{
-			"id": 1,
-			"Nome" : "Batalha de Nova Iorque",
-			"Descricao" : "shajhsjkahfjksahfjkdhjfkshfjkhsfjd"
+			"batalhaid" : 1
 		}
 	]
 }
 
-##### JSON Batalha:
+##### exemplo JSON para Adicionar Batalha
 
 
 {
-    "id": 0,
-    "nome": 0,
-    "descricao": null,
-    "dtInicio": "0001-01-01T00:00:00",
-    "dtFim": "0001-01-01T00:00:00",
-    "heroiBatalhas": null
+    "nome": "A primeira batalha",
+    "descricao": "teste"
 }
+
+##### exemplo JSON para Atualizar Batalha
+
+{
+    "id": 2,
+    "nome": "A segunda batalha 556565665",
+    "descricao": "teste2"
+}
+
+
+##### exemplo JSON para Atualizar Batalha com Herois Batalha
+
+
+{
+    "id": 1,
+    "nome": "Batalha em New York",
+    "descricao": "Primeira Batalha Vingadores",
+	"heroiBatalhas" : [
+		{
+			"heroiid" : 1
+		},
+		{
+			"heroiid" : 2
+		},
+		{
+			"heroiid" : 4
+		},
+		{
+			"heroiid" : 8
+		}
+	]
+}
+
+	
 
 
 
