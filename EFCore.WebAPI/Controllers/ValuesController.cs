@@ -21,7 +21,7 @@ namespace EFCore.WebAPI.Controllers
             _context = context;
         }
 
-        // GET api/values/pegartodos
+        // GET api/values/getid/5
         [HttpGet("getid/{id}")]
         public ActionResult GetById(int id)
         {

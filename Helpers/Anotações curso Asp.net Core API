@@ -17,6 +17,7 @@ exemplo JSON para Adicionar Nome, Identidade Secreta e Armas
     		"nome": "Teias"
     	}	
     ]
+	
 }
 
 
@@ -33,8 +34,48 @@ exemplo JSON para Atualizar Nome, identidade Secreta e Armas
     		"id": 8,
     		"nome": "Teias"
     	}	
-    ]
+    ],
+	"heroiBatalhas" : [
+		{
+			"id": 1,
+			"Nome" : "Batalha de Nova Iorque",
+			"Descricao" : "shajhsjkahfjksahfjkdhjfkshfjkhsfjd"
+		}
+	]
 }
+
+##### JSON Batalha:
+
+
+{
+    "id": 0,
+    "nome": 0,
+    "descricao": null,
+    "dtInicio": "0001-01-01T00:00:00",
+    "dtFim": "0001-01-01T00:00:00",
+    "heroiBatalhas": null
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
