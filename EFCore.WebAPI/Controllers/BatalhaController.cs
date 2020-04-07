@@ -6,6 +6,7 @@ using EFCore.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace EFCore.WebAPI.Controllers
 {
@@ -13,20 +14,22 @@ namespace EFCore.WebAPI.Controllers
     [ApiController]
     public class BatalhaController : ControllerBase
     {
-        private readonly HeroiContext _context;
+        private readonly IEFCoreRepository _repository;
 
-        public BatalhaController(HeroiContext context)
+        public BatalhaController(IEFCoreRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Batalha
-        [HttpGet]
-        public ActionResult Get()
+        // GET: api/Batalha/GetBatalhas
+        [HttpGet("GetBatalhas")]
+        public async Task<IActionResult> Get()
         {
             try
             {
-                return Ok(new Batalha());  // pegar o json vazio
+                var batalhas = await _repository.GetAllBatalhas();
+
+                return Ok(batalhas);
             }
             catch (Exception ex)
             {
@@ -37,52 +40,95 @@ namespace EFCore.WebAPI.Controllers
 
         // GET: api/Batalha/getid/1
         [HttpGet("getid/{id}")]
-        public ActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok();
+            try
+            {
+                var batalha = await _repository.GetBatalhaById(id);
+
+                return Ok(batalha);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Erro: " + ex);
+            }
         }
 
         // POST: api/Batalha/InserirBatalha
         [HttpPost("InserirBatalha")]
-        public ActionResult Post(Batalha model)
+        public async Task<IActionResult> Post(Batalha model)
         {
             try
             {
-                _context.Batalhas.Add(model);
-                _context.SaveChanges();
+                _repository.Add(model);
 
-                return Ok("Batalha Cadastrada");
+                if(await _repository.SaveChangeAsync())
+                {
+                    return Ok("Batalha Cadastrada");
+
+                }
+                
             }
             catch (Exception ex)
             {
                 return BadRequest("Erro: " + ex);
             }
+
+            return BadRequest("Batalha não foi cadastrada.");
         }
 
         // PUT: api/Batalha/AtualizarBatalha/5
         [HttpPut("AtualizarBatalha/{id}")]
-        public ActionResult Put(int id, Batalha model)
+        public async Task<IActionResult> Put(int id, Batalha model)
         {
             try
             {
-                if (_context.Batalhas.AsNoTracking().FirstOrDefault(x => x.Id == id) != null)
+                var batalha = await _repository.GetBatalhaById(id);
+
+                if (batalha != null)
                 {
-                    _context.Batalhas.Update(model);
-                    _context.SaveChanges();
+                    _repository.Update(model);
+
+                    if (await _repository.SaveChangeAsync())
+                    {
+                        return Ok("Batalha Atualizada!");
+                    }
                 }
 
-                return Ok("Batalha alterada com sucesso!");
             }
             catch (Exception ex)
             {
                 return BadRequest("Erro: " + ex);
             }
+
+            return BadRequest("Batalha não foi atualizada!");
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var batalha = await _repository.GetBatalhaById(id);
+
+                if (batalha != null)
+                {
+                    _repository.Delete(batalha);
+
+                    if(await _repository.SaveChangeAsync())
+                    {
+                        return Ok("Batalha excluída!");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Erro: " + ex);
+            }
+
+            return BadRequest("NÃO DELETADO!");
         }
     }
 }
