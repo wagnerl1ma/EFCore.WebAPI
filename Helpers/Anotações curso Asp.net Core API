@@ -1,8 +1,10 @@
+Entity Framework Core + Asp.NET Core Web API + SQL Server
 Anotações curso Asp.net Core API
 
 commits:
 POST formato JSON, PUT formato JSON, Realizando inserts e updates com mais de um objeto no formato JSON
 Nova Migration e criação da controller BatalhaController
+Criando classe e interface Repository, alterando metodos para async, aprendendo mais sobre o include, ignorando loop infinito
 
 
 
@@ -17,6 +19,20 @@ exemplo JSON para Adicionar Nome, Identidade Secreta e Armas
     "armas" : [
     	{	
     		"nome": "Teias"
+    	}	
+    ]	
+}
+
+outro:
+
+{
+    "nome": "Wolverine",
+	"identidade" : {
+    	"nomereal" : "Logan"
+    },
+    "armas" : [
+    	{	
+    		"nome": "Garras de Adamantio"
     	}	
     ]
 	
